@@ -16,8 +16,8 @@ var link;
 var o;
 var i = 0,
     duration = 750,
-    rectW = 60,
-    rectH = 30;
+    rectW = 160,
+    rectH = 40;
 var tree;
 var diagonal;
 var svg;
@@ -173,7 +173,7 @@ update = function(source) {
 function drawMap(jobject)  {
     root = jobject;
 
-    tree = d3.layout.tree().nodeSize([70, 40]);
+    tree = d3.layout.tree().nodeSize([160, 40]);
     diagonal = d3.svg.diagonal()
         .projection(function (d) {
         return [d.x + rectW / 2, d.y + rectH / 2];
@@ -261,7 +261,7 @@ function onButtonSaveClick() {
     var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
     var img = '<img src="'+imgsrc+'">';
 
-    console.log(d3.select("#svgdataurl"));
+    console.log(d3.select("#svgdataurl"));  
 
     var canvas = document.querySelector("canvas"),
       context = canvas.getContext("2d");

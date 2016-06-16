@@ -3,16 +3,19 @@
 }
 .node circle {
     fill: #fff;
-    stroke: steelblue;
+    stroke: rgb(255, 215, 0);
     stroke-width: 1.5px;
 }
+
 .node text {
     font: 10px sans-serif;
 }
+
 .link {
     fill: none;
-    stroke: #ccc;
-    stroke-width: 1.5px;
+    stroke: rgb(255, 215, 0);
+    stroke-width: 2px;
+    stroke-linecap: round;
 }
 
 body {

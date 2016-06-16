@@ -11,7 +11,13 @@
 <link rel="stylesheet" type="text/css" href="{% static 'sitemap/style.css' %}">
 
 <div class="container">
-	<h2> Site map generator </h2>
+	<div class="row">
+		<a class="btn btn-lg btn-link pull-right" href="./">
+	      <i class="glyphicon glyphicon-home pull-left"></i><span>Go back to search</span>
+	    </a> 
+	    <h1> Site map generator </h1>
+	    
+  	</div>
 	<div class="row col-md-4">
 		<div class="form-group" id="sitemap-form">
 			<label>Url:</label>
@@ -20,7 +26,7 @@
 			<button type="button" class="form-control btn btn-primary" onclick="onButtonClick()">Create sitemap</button>
 			<br>
 			<br>
-			<button class="form-control btn btn-success" id="save">Save as Image</button>
+			<button class="form-control btn btn-success" onclick="onButtonSaveClick()" id="save">Save as Image</button>
 			<div id="svgdata"></div>
 			<div id="pngdataurl"></div>
 			<canvas width="960" height="500" style="display:none"></canvas>

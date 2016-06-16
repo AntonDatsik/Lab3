@@ -241,45 +241,43 @@ function onButtonClick() {
         //set url value to a element's href attribute.
         $("#link").href = url;
         //you can download svg file by right click menu.
-
-        btn = d3.select("#save")[0];
-        console.log(btn);
-        btn.onclick = function(){
-            var html = d3.select("svg")
-                .attr("version", 1.1)
-                .attr("xmlns", "http://www.w3.org/2000/svg")
-                .node().parentNode.innerHTML;
-
-            //console.log(html);
-            var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
-            var img = '<img src="'+imgsrc+'">';
-            d3.select("#svgdataurl")[0].html(img);
-
-
-            var canvas = document.querySelector("canvas"),
-              context = canvas.getContext("2d");
-
-            var image = new Image;
-            image.src = imgsrc;
-            image.onload = function() {
-              context.drawImage(image, 0, 0);
-
-              var canvasdata = canvas.toDataURL("image/png");
-
-              var pngimg = '<img src="'+canvasdata+'">';
-            	  d3.select("#pngdataurl")[0].html(pngimg);
-
-              var a = document.createElement("a");
-              a.download = "sample.png";
-              a.href = canvasdata;
-                  document.body.appendChild(a);
-              a.click();
-            };
-
-        };
-
     });
     if (statusCode == 400) {
         return;
     }
+}
+
+function onButtonSaveClick() {
+
+    console.log("Save as image");
+
+    var html = d3.select("svg")
+        .attr("version", 1.1)
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .node().parentNode.innerHTML;
+
+
+    //console.log(html);
+    var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
+    var img = '<img src="'+imgsrc+'">';
+
+    console.log(d3.select("#svgdataurl"));
+
+    var canvas = document.querySelector("canvas"),
+      context = canvas.getContext("2d");
+
+    var image = new Image;
+    image.src = imgsrc;
+    image.onload = function() {
+      context.drawImage(image, 0, 0);
+
+      var canvasdata = canvas.toDataURL("image/png");
+
+      var a = document.createElement("a");
+      a.download = "sample.png";
+      a.href = canvasdata;
+          document.body.appendChild(a);
+      a.click();
+    };
+
 }

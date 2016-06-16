@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^delete_url/(?P<pk>\d+)/$', views.delete_url, name='delete_url'),
     url(r'^update_url/(?P<pk>\d+)/$', views.update_url, name='update_url'),
     url(r'^index_control$', views.index_control, name='index_control'),
+    url(r'^sitemap$', views.sitemap, name='sitemap'),
+    url(r'^sitemap/create$', views.generate_sitemap, name='generate_sitemap'),
 ]

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import json
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from search_engine.search_engine import SearchEngine
@@ -8,6 +9,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from web_crawler.crawler import WebCrawler
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from search.sitemap import Sitemap_generator
 
 import threading
 from Queue import Queue
@@ -92,6 +95,21 @@ def search_for_results(request):
             return render(request, 'search/show_results.html', { 'pages': pages,
                                                                  'form': f })
     return HttpResponseRedirect(reverse('index'))
+
+def sitemap(request):
+    if request.method == "GET":
+        return render(request, 'sitemap/index.html')
+
+def generate_sitemap(request):
+    if request.method == "GET":
+        url = request.GET.get('url')
+        crawler = WebCrawler(limit_width=2, limit_depth=3)
+        event = threading.Event()
+        urls = crawler.traverse(url, event, Queue())
+        print urls
+        obj = Sitemap_generator.build_site_map(url, urls)
+        return HttpResponse(json.dumps(obj), content_type="application/json") 
+
 
 def crawler_worker(crawler, start_url, event, queue):
     crawler.traverse(start_url, event, queue)
